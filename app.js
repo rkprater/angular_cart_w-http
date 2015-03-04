@@ -1,8 +1,36 @@
-<h3>{{admin.singleProduct.title}}</h3>
+(function () {
+  "use strict";
 
-  <img style="width:500px" src="{{admin.singleProduct.photo}}" alt="{{admin.singleProduct.title}}">
+  angular.module('angularProductCart', [
+    'ngRoute'
+  ])
+  .config(function ($routeProvider) {
+    $routeProvider
+      .when('/', {
+        templateUrl: 'views/main.html',
+        controller: 'MainController as main'
+      })
+      .when('/admin', {
+        templateUrl: 'views/admin.html',
+        controller: 'AdminController as admin'
+      })
+      .when('/admin/new', {
+        templateUrl: 'views/newProduct.html',
+        controller: 'AdminController as admin'
+      })
+      .when('/admin/edit/:productId', {
+        templateUrl: 'views/editProduct.html',
+        controller: 'AdminController as admin'
+      })
+      .when('/admin/detail/:productId', {
+        templateUrl: 'views/productDetail.html',
+        controller: 'AdminController as admin'
+      })
+      .when('/cart', {
+        templateUrl: 'views/cart.html',
+        controller: 'CartController as cart'
+      });
 
-  <p>{{admin.singleProduct.description}}</p>
-
-  <p>{{admin.singleProduct.price}}</p>
-  <p><a href="#/admin/edit/{{admin.currentIndex}}">Edit</a> | <a href="" ng-click="admin.deleteProduct(admin.currentIndex)">Delete</a></p>
+  })
+  .constant('_', _);
+})();
